@@ -6,8 +6,6 @@ HC3 Display Microservice -> Display HC3 State on Lcd Display.
 This Microservice receive Data (Temperatures) from other Microservices via aqmp 
 And shows Data on a Lcd Display connected via I2c
 
-![](https://joern-karthaus.de/heatingControl/img/hc3-core.png)
-
 ## What is HC3
 HeatingControl3 is s set of Microservices to control a Wood burning
 Heating System with a Raspberry Pi.  
@@ -23,7 +21,6 @@ Shown in this Diagramm:
 
 ## HC3 in Action
 ![hc3-action1](https://joern-karthaus.de/heatingControl/img/hc3-11.jpg)
-![hc3-action2](https://joern-karthaus.de/heatingControl/img/hc3-10.jpg)
 
 ## Install HC3
 
