@@ -98,6 +98,7 @@ def main():
     rowData[2] = " "
     rowData[3] = " "
 
+
     if not demoMode:
         logging.info("LCD initialised...")
         lcd = lcddriver.lcd()
@@ -118,4 +119,10 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except:
+        logging.info("---------------------------------------------")
+        logging.info("-- CRITICAL ERROR OCCURED...")
+        logging.info("---------------------------------------------")
+        sys.exit(2)
