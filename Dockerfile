@@ -1,4 +1,4 @@
-FROM seblucas/alpine-python3
+FROM python:3.8-alpine
 
 WORKDIR /usr/src/app
 

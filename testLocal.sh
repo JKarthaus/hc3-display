@@ -2,7 +2,7 @@
 
 echo "Local testing the great Heating Control LCD Display Connector"
 
-export RABBIT_MQ_HOST=192.168.2.118
+export RABBIT_MQ_HOST=hc3-werkstatt
 export RABBIT_MQ_QUEUE=hc-lcd-display
 
 export DEMO_MODE=True
