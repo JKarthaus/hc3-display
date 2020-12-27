@@ -50,15 +50,9 @@ def openConnection():
     global rabbitMqHost
     global rabbitMqQueue
 
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host=rabbitMqHost))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitMqHost))
     channel = connection.channel()
-    channel.queue_declare(queue=rabbitMqQueue)
-
-    channel.basic_consume(queue=rabbitMqQueue,
-                          auto_ack=True,
-                          on_message_callback=callback)
-
+    channel.basic_consume(queue=rabbitMqQueue,on_message_callback=callback)
     logging.info("Waiting for Messages on Queue:" + rabbitMqQueue)
     channel.start_consuming()
 # -------------------------------------------------------------------------------------------------------
@@ -66,18 +60,22 @@ def openConnection():
 
 def closeConnection():
     global connection
-    connection.close
+    connection.close()
 # -------------------------------------------------------------------------------------------------------
 
 
 def callback(ch, method, properties, body):
     global rabbitMqQueue
     global rowData
+
     try:
+        ch.basic_ack(delivery_tag=method.delivery_tag)
         logging.debug("Message arrived")
         stringBody = "".join(map(chr, body))
 
         if stringBody.find("=") != -1:
+            if demoMode:
+                logging.info("Rceived:" + stringBody)
             row = stringBody[0:stringBody.find("=")]
             rowData[int(row)] = stringBody[stringBody.find("=")+1:]
         else:
@@ -103,13 +101,14 @@ def main():
         logging.info("LCD initialised...")
         lcd = lcddriver.lcd()
         lcd.lcd_clear()
+        # Start anf join the output Thread
+        outputThread = Thread(target=writeDataToDisplay)
+        outputThread.join()
+        outputThread.daemon = True
+        outputThread.start()
     else:
         logging.info("lcdDisplay Connector Started in DEMO MODE")
 
-    outputThread = Thread(target=writeDataToDisplay)
-    outputThread.join
-    outputThread.daemon = True
-    outputThread.start()
 
     openConnection()
 
