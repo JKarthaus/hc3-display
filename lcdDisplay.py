@@ -5,8 +5,6 @@ import sys
 import threading
 import time
 import traceback
-from time import *
-
 import pika
 
 import lcddriver
