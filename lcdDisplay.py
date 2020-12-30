@@ -30,6 +30,7 @@ def writeDataToDisplay():
     ct = threading.currentThread()
     lcd = lcddriver.lcd()
     while getattr(ct, "do_checking", True):
+        time.sleep(3)
         if not demoMode:
             lcd.lcd_clear()
         else:
@@ -41,7 +42,6 @@ def writeDataToDisplay():
             if not demoMode:
                 lcd.lcd_display_string(row, rowCount)
             rowCount += 1
-        time.sleep(10)
 
 
 # -------------------------------------------------------------------------------------------------------
