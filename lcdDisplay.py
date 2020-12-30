@@ -40,7 +40,7 @@ def writeDataToDisplay():
         for row in rowData:
             logging.info("Write: " + row + " on LCD row:" + str(rowCount))
             if not demoMode:
-                lcd.lcd_display_string(row, rowCount)
+                lcd.lcd_display_string(row, (rowCount + 1))
             rowCount += 1
 
 
